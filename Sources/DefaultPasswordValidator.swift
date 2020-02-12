@@ -11,8 +11,13 @@ import Foundation
 
 public struct PasswordRule {
 
-    let hint: String
-    let test: (String) -> Bool
+    public let hint: String
+    public let test: (String) -> Bool
+    
+    public init(hint: String, _ test: @escaping (String) -> Bool) {
+        self.hint = hint
+        self.test = test
+    }
 
 }
 
@@ -50,9 +55,9 @@ open class DefaultPasswordValidator: PasswordValidator {
 
 }
 
-internal extension String {
+public extension String {
 
-    func satisfiesRegexp(_ regexp: String) -> Bool {
+    public func satisfiesRegexp(_ regexp: String) -> Bool {
         return range(of: regexp, options: .regularExpression) != nil
     }
 
